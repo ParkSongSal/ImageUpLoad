@@ -94,12 +94,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 // 다시 권한 요청
 
                 ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE}
                         ,1000);
             }else{
                 //권한을 요청
                 ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE},
                         1000);
             }
         }else{
@@ -156,7 +156,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         File originalFile = FileUtils.getFile(this, filePath);
         RequestBody titlePart = RequestBody.create(MultipartBody.FORM,Title);
         RequestBody imagePart = RequestBody.create(
-                MediaType.parse(getContentResolver().getType(filePath)),
+                //MediaType.parse(getContentResolver().getType(filePath)),
+                MediaType.parse("multipart/form-data"),
                 originalFile);
 
         MultipartBody.Part file = MultipartBody.Part.createFormData("image",originalFile.getName(),imagePart);
@@ -175,9 +176,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                Log.d("TAG","imageUpload Faild.." + t.getMessage());
            }
        });
-
-
-
     }
 
     private void selectImage(){

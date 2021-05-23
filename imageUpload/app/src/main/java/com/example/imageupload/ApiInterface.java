@@ -16,7 +16,7 @@ public interface ApiInterface {
 
 
     @Multipart
-    @POST("upload2.php")
+    @POST("upload3.php")
     Call<ResponseBody>uploadImage(@Part("title") RequestBody title,
                                   @Part MultipartBody.Part image);
     /*Call<ImageClass> uploadImage(@Field("title") String title,
